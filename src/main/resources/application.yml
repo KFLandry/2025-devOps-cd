@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: tp-cd-2024
+  datasource:
+    url: ${DATABASE_JDBC_URL}
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+

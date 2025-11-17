@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Spring Boot App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+<div class="bg-white p-8 rounded-lg shadow-lg text-center w-full max-w-md">
+    <h1 class="text-3xl font-bold mb-6">Hello!</h1>
+
+    <button id="check-health" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        Check Application Health
+    </button>
+
+    <div id="response" class="mt-6 text-gray-700"></div>
+</div>
+
+<script>
+    const responseDiv = document.getElementById('response');
+    const checkHealthButton = document.getElementById('check-health');
+
+    function checkApplicationHealth() {
+        responseDiv.innerHTML = '<p class="text-gray-500">Loading...</p>';
+        fetch('/api/health')
+            .then(response => response.json())
+            .then(data => {
+                const statusP = document.createElement('p');
+                statusP.textContent = data.status;
+                statusP.classList.add('text-green-600', 'font-semibold');
+
+                const statusMessageP = document.createElement('p');
+                statusMessageP.textContent = data.message;
+                statusMessageP.classList.add('text-gray-700');
+
+                responseDiv.innerHTML = '';
+                responseDiv.appendChild(statusP);
+                responseDiv.appendChild(statusMessageP);
+            })
+            .catch(error => {
+                responseDiv.innerHTML = `<p class="text-red-600">${JSON.stringify(error)}</p>`;
+            });
+    }
+
+    checkHealthButton.addEventListener('click', checkApplicationHealth);
+</script>
+
+</body>
+</html>
