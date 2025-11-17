@@ -1,6 +1,6 @@
 spring:
   application:
-    name: tp-cd-2024
+    name: tp-cd-2025
   datasource:
     url: ${DATABASE_JDBC_URL}
   jpa:
