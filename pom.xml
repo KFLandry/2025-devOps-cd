@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>fr.anthonyquere</groupId>
-    <artifactId>tp-cd-2024</artifactId>
+    <artifactId>tp-cd-2025</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <url/>

@@ -1,8 +1,14 @@
 FROM openjdk:21-jdk AS build
 WORKDIR /workspace
-ARG JAR_FILE=target/tp-cd-2025.war
-COPY $JAR_FILE .
-RUN java -Djarmode=layertools -jar tp-cd-2025.war extract --destination extracted
+
+COPY . .
+
+RUN ./mvnw clean package -DskipTests
+
+COPY target .
+
+RUN java -Djarmode=layertools -jar target/tp-cd-2025-0.0.1-SNAPSHOT.jar extract --destination extracted
+
 
 FROM openjdk:21-jdk
 LABEL wl.maintainer='Wilfried Landry <kankeulandry22@gmail.com>'
@@ -14,8 +20,8 @@ COPY --from=build ${EXTRACTED}/snapshot-dependencies/ ./
 COPY --from=build ${EXTRACTED}/application/ ./
 WORKDIR /runtime
 ENV TZ="Europe/Paris"
+
 EXPOSE 8080
-VOLUME /runtime/delivery
-ENV JAVA_OPTS="-cp /runtime/delivery:/runtime/app"
-RUN mkdir -p /runtime/log && chmod -R 777 /runtime/log
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} org.springframework.boot.loader.launch.WarLauncher"]
+
+
+ENTRYPOINT ["/bin/sh", "-c", "./mvnw spring-boot:run"]
