@@ -40,18 +40,18 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4.2.2
-      - name: Log in to GitHub Container Registry
+      - name: Log in to Docker Hub
         uses: docker/login-action@v3.3.0
         with:
-          registry: ghcr.io
+          registry: docker.io
           username: ${{ github.actor }}
-          password: ${{ secrets.PAT_GITHUB_PACKAGE_PUBLICATION }}
+          password: ${{ secrets.PAT_DOCKER_HUB }}
       - name: Build, tag and push Docker image
         run: |
-          docker build -t ghcr.io/kflandry/tp-cd-2025:latest .
-          docker tag ghcr.io/kflandry/tp-cd-2025:latest ghcr.io/kflandry/tp-cd-2025:$GITHUB_SHA
-          docker push ghcr.io/kflandry/tp-cd-2025:latest
-          docker push ghcr.io/kflandry/tp-cd-2025:$GITHUB_SHA
+          docker build -t docker.io/kflandry/tp-cd-2025:latest .
+          docker tag docker.io/kflandry/tp-cd-2025:latest docker.io/kflandry/tp-cd-2025:$GITHUB_SHA
+          docker push docker.io/kflandry/tp-cd-2025:latest
+          docker push docker.io/kflandry/tp-cd-2025:$GITHUB_SHA
 
   push_docs:
     runs-on: ubuntu-latest
