@@ -44,7 +44,7 @@ jobs:
         uses: docker/login-action@v3.3.0
         with:
           registry: docker.io
-          username: kflandry
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.PAT_DOCKER_HUB }}
       - name: Build, tag and push Docker image
         run: |
@@ -69,7 +69,7 @@ jobs:
         with:
           publish-dir: "./dist"
           production-branch: master
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAT_DOCKER_HUB }}
           deploy-message: "Deploy from GitHub Actions"
           enable-pull-request-comment: false
           enable-commit-comment: true
@@ -93,5 +93,4 @@ jobs:
           wait_deploy: true
           github_deployment: true
           deployment_environment: "production"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
+          github_token: ${{ secrets.PAT_DOCKER_HUB }}

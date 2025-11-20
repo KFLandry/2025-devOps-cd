@@ -29,4 +29,4 @@ ENV TZ="Europe/Paris"
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT [ "java", "-cp", "application:dependencies/*", "org.springframework.boot.loader.JarLauncher" ]
