@@ -44,7 +44,7 @@ jobs:
         uses: docker/login-action@v3.3.0
         with:
           registry: docker.io
-          username: ${{ github.repository_owner }}
+          username: kflandry
           password: ${{ secrets.PAT_DOCKER_HUB }}
       - name: Build, tag and push Docker image
         run: |
@@ -94,3 +94,4 @@ jobs:
           github_deployment: true
           deployment_environment: "production"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
