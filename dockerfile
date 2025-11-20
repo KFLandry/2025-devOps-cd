@@ -14,7 +14,7 @@ RUN ./mvnw -B -DskipTests package
 
 # extract layers
 ARG JAR_FILE=target/tp-cd-2025-0.0.1-SNAPSHOT.jar
-RUN java -Djarmode=layers -jar ${JAR_FILE} extract --destination /workspace/extracted
+RUN java -Djarmode=layertools -jar ${JAR_FILE} extract --destination /workspace/extracted
 
 FROM eclipse-temurin:21-jre
 LABEL wl.maintainer='Wilfried Landry <kankeulandry22@gmail.com>'
