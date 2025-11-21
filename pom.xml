@@ -11,6 +11,7 @@
     <groupId>fr.anthonyquere</groupId>
     <artifactId>tp-cd-2025</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <url/>
     <licenses>
@@ -68,6 +69,11 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

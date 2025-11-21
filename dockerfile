@@ -13,8 +13,8 @@ COPY settings.xml ./
 RUN ./mvnw -B -DskipTests package
 
 # extract layers
-ARG JAR_FILE=target/tp-cd-2025-0.0.1-SNAPSHOT.jar
-RUN java -Djarmode=layertools -jar ${JAR_FILE} extract --destination /workspace/extracted
+ARG WAR_FILE=target/tp-cd-2025-0.0.1-SNAPSHOT.war
+RUN java -Djarmode=layertools -jar ${WAR_FILE} extract --destination /workspace/extracted
 
 FROM eclipse-temurin:21-jre
 LABEL wl.maintainer='Wilfried Landry <kankeulandry22@gmail.com>'
@@ -29,4 +29,4 @@ ENV TZ="Europe/Paris"
 
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "-cp", "application:dependencies/*", "org.springframework.boot.loader.JarLauncher" ]
+ENTRYPOINT [ "java", "org.springframework.boot.loader.WarLauncher" ]
