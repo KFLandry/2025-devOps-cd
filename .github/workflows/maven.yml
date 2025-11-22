@@ -8,6 +8,14 @@
 
 name: Java CI with Maven
 
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  statuses: write
+  deployments: write
+  id-token: write
+
 on:
   push:
     branches: ["main"]
@@ -110,4 +118,3 @@ jobs:
           image-url: docker.io/kflandry/tp-cd-2025:latest
           render-api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-deployment: true
-
